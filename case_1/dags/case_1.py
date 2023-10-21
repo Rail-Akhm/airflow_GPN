@@ -38,6 +38,7 @@ def _parse_csv_file():
             'work_time': [],
             'start_date': [],
             'end_date': [],
+            'IsCurrent': [],
         }
 
         for row in csv_reader:
@@ -55,15 +56,15 @@ def _parse_csv_file():
         phone2 = data['phone2']
         work_month = data['work_month']
         work_time = data['work_time']
-        start_date = data['start_date']
-        end_date = data['end_date']
 #        print(employee_key, tab_number,full_name)
  
     with open("/tmp/postgres_query.sql", "w") as f:
-        for employee_key, tab_number, department, position, full_name, birth_date, current_adress, phone1, phone2, work_month, work_time, start_date, end_date in zip(employee_key, tab_number, department, position, full_name, birth_date, current_adress, phone1, phone2, work_month, work_time, start_date, end_date):
+        for employee_key, tab_number, department, position, full_name, birth_date, current_adress, phone1, phone2, work_month, work_time in zip(employee_key, tab_number, department, position, full_name, birth_date, current_adress, phone1, phone2, work_month, work_time):
             f.write(
-                f"INSERT INTO employee_data (page_title, page_id) VALUES "
-                f"('{employee_key}', '{tab_number}','{department}','{position}','{full_name}','{birth_date}','{current_adress}','{phone1}','{phone2}','{work_month}','{work_time}','{start_date}','{end_date}',);\n"
+                f"INSERT INTO employee_data (employee_key, tab_number, department, position, full_name, birth_date, current_adress, phone1, phone2, work_month, work_time) VALUES "
+                f"('{employee_key}', '{tab_number}','{department}','{position}','{full_name}','{birth_date}','{current_adress}','{phone1}','{phone2}','{work_month}','{work_time}');\n"
+           #если включить нижнюю строчку, все перестанет работать)
+                f"CALL correct_IsCurrent();\n"
             )
 
 

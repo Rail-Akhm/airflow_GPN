@@ -3,3 +3,5 @@ FROM ${AIRFLOW_BASE_IMAGE}
 
 RUN pip install --user --no-cache-dir \
     apache-airflow-providers-postgres==1.0.0
+
+COPY database_setup.sql /docker-entrypoint-initdb.d/

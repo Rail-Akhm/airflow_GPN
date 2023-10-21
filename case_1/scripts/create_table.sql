@@ -1,3 +1,4 @@
+-- Создаем таблицу employee_data
 CREATE TABLE employee_data (
     employee_key INT,
     tab_number INT,
@@ -11,6 +12,6 @@ CREATE TABLE employee_data (
     work_month INT,
     work_time INT,
     start_date DATE,
-    end_date DATE
+    end_date DATE,
+    IsCurrent BOOLEAN
 );
-
